@@ -1,0 +1,5 @@
+# image: ${registry}/${app}:latest-cache
+# image: ${registry}/${app}:$commit($gitTag)
+registry: a.b.c/app
+
+app: demo

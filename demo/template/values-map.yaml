@@ -1,0 +1,10 @@
+# 优先级如下
+# a/b/c.yaml.j2
+# a/b
+# a
+a:
+- all
+- foo
+
+# a/b.yaml.j2:
+# - all

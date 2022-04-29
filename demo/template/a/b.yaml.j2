@@ -1,0 +1,6 @@
+foo: {{ foo }} 
+foo2: {{ foo }} 
+root: {{ root | toYaml | indent(2) }}
+test:
+  root: {{ root | toYaml | indent(4) }}
+  {{ root | toYaml | indent(2) }}

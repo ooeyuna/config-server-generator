@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "deepmerge": "^4.2.2",
+    "js-yaml": "^4.1.0",
+    "nunjucks": "^3.2.3",
+    "shelljs": "^0.8.5",
+    "yargs": "^17.4.1"
+  },
+  "devDependencies": {
+    "@types/deepmerge": "^2.2.0",
+    "@types/js-yaml": "^4.0.5",
+    "@types/node": "^17.0.24",
+    "@types/nunjucks": "^3.2.1",
+    "@types/shelljs": "^0.8.11",
+    "@types/yargs": "^17.0.10"
+  }
+}
