@@ -14,8 +14,8 @@ export class Workspace {
     this.templateFolderPath = `${this.rpath}/template`;
     this.secretsFolderPath = argv.secrets ? `${this.rpath}/${argv.secrets}` : undefined;
     logger.info(`current workspace: ${this.rpath}`);
-    logger.info(`current envpath: ${this.envpath}`);
-    logger.info(`current templateFolderPath: ${this.templateFolderPath}`);
+    logger.debug(`current envpath: ${this.envpath}`);
+    logger.debug(`current templateFolderPath: ${this.templateFolderPath}`);
     logger.info(`current secretsFolderPath: ${this.secretsFolderPath}`);
   }
 }

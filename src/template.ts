@@ -12,7 +12,7 @@ export type RenderOptions = {
 };
 
 export function templateRender(templatePath: string, values: any, options?: RenderOptions): string {
-  logger.info(`template path: ${templatePath}`);
+  logger.debug(`template path: ${templatePath}`);
   logger.debug(`render values: \n${dump(values)}`);
   const render = nunjucks.configure(".", {
     autoescape: false,
@@ -112,7 +112,7 @@ export class TemplateRender {
   private prepare(): void {
     const source = `${this.ws.rpath}/config`;
     const target = `${this.ws.rpath}/config.previous`;
-    logger.info(`move previous config ${source} to ${target}`);
+    logger.debug(`move previous config ${source} to ${target}`);
     shelljs.mv("-f", source, target);
   }
 }

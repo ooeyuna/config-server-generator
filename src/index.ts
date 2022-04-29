@@ -1,9 +1,10 @@
 import { dump } from "js-yaml";
 import * as yargs from "yargs";
-import { EnvMerger, ValueMaps } from "./env";
+import { EnvMerger } from "./env";
 import { logger } from "./logger";
-import { dencrpytResult, encrpytResult, TemplateRender, templateRender } from "./template";
+import { dencrpytResult, TemplateRender } from "./template";
 import { Workspace } from "./workspace";
+import { prebuild } from "./build";
 
 const process: any = {
   "g": (argv: any, ws: Workspace): void => {
@@ -27,7 +28,11 @@ const process: any = {
     console.log(dump(env, { indent: 2 }));
   },
   "demo": (argv: any, ws: Workspace): void => {},
-  "build": (argv: any, ws: Workspace): void => {},
+  "prebuild": (argv: any, ws: Workspace): void => {
+    const render = new TemplateRender(ws);
+    render.generate();
+    prebuild(ws);
+  },
   "decrypt": (argv: any, ws: Workspace): void => {
     let salt = argv.salt;
     if (!salt) {
@@ -124,13 +129,13 @@ const argv = yargs
       })
       .help();
   }, main("env"))
-  .command("build", "build config web server docker image", (yargs: any) => {
+  .command("prebuild", "build config web server docker image", (yargs: any) => {
     return yargs
       .option("tag", {
         demand: true,
         describe: "image tag",
       })
       .help();
-  }, main("build"))
+  }, main("prebuild"))
   .command("init", "init demo repo", main("init"))
   .argv;

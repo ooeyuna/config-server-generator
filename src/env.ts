@@ -29,7 +29,7 @@ export class ValueMaps {
       .find(`${this.templateDir}`)
       .filter((file: string) => { return file.match(/\.j2$/); });
     let values: any;
-    values = readYaml(`${this.templateDir}/values-map.yaml`, true);
+    values = readYaml(`${this.templateDir}/values-map.yaml`, true, 0);
     if (!values) {
       logger.info(`Cannot find ${this.templateDir}/values-map.yaml, only use all.yaml and #{template_name}.yaml`);
       values = {};
@@ -45,7 +45,7 @@ export class ValueMaps {
 
   public parseWithTemplateFolderPath(path: string): string[] {
     let values: any;
-    values = readYaml(`${this.templateDir}/values-map.yaml`, true);
+    values = readYaml(`${this.templateDir}/values-map.yaml`, true, 0);
     if (!values) {
       logger.info(`Cannot find ${this.templateDir}/values-map.yaml, only use all.yaml and #{template_name}.yaml`);
       values = {};
@@ -69,7 +69,7 @@ export class EnvMerger {
     logger.debug(`current env merger: (workspacePath: ${ws.rpath}, env: ${env}, secretPath: ${ws.secretsFolderPath})`);
     if (ws.secretsFolderPath) {
       const saltPath = `${ws.secretsFolderPath}/${env}/salt`;
-      this.salt = readFile(saltPath, true);
+      this.salt = readFile(saltPath, true, 0);
       if (this.salt) {
         this.secretPath = `${ws.secretsFolderPath}/${env}`;
         logger.debug(`find salt at ${this.secretPath}`);
@@ -88,7 +88,7 @@ export class EnvMerger {
     }
     let data = this.read(apps, this.envPath);
     if (this.secretPath) {
-      logger.info(`find secrets, use secrets override`);
+      logger.debug(`find secrets, use secrets override`);
       const secrets = this.read(apps, this.secretPath);
       if (secrets) {
         data = deepmerge(data, secrets);
@@ -99,7 +99,7 @@ export class EnvMerger {
 
   private read(apps: string[], path: string): any {
     return apps.map((app: string): any => {
-      return readYaml(`${path}/${app}.yaml`, true);
+      return readYaml(`${path}/${app}.yaml`, true, 0);
     })
       .filter(item => item)
       .reduce((prev, curr) => {

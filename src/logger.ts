@@ -34,6 +34,12 @@ export const logger = {
     logInstance.print(3, msg, error);
     process.exit(1);
   },
+  log: (level: number, msg: string, error?: Error) => {
+    logInstance.print(level, msg, error);
+    if (level === 3) {
+      process.exit(1);
+    }
+  },
   init: (level: number) => {
     if (!logInstance) {
       logInstance = new Logger(level);
